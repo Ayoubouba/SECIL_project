@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@tailwind;
+@tailwind utilities;
+@tailwind utilities;
+@layer base {
+    h1 {
+        @apply mx-auto max-w-4xl text-center text-2xl font-bold leading-tight tracking-[-1%]  sm:text-[64px] sm:leading-[76px];
+    }
+
+    h2 {
+        @apply text-2xl font-bold text-white sm:text-3xl;
+    }
+
+}
