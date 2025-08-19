@@ -18,14 +18,18 @@ app.use(cors());
 mongoose.connect("mongodb://localhost:27017/SECIL_database");
 
 app.post("/login", (req, res) => {
-    const { email, password } = req.body;
+    const { email, password,first_name,last_name,department,employee_id} = req.body;
     const user = USERS.findOne({ email })
         .then(user => {
             if(user){
                 if(user.password === password){
                     res.json({
                         success: true,
+                        email: user.email,
                         role: user.role,
+                        name: user.first_name + " " +user.last_name,
+                        department: user.department,
+                        id:user.employee_id,
                     });
                 }else{
                     res.json("password incorrect")

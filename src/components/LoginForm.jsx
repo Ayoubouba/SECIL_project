@@ -13,7 +13,15 @@ const LoginForm = ({Onloginchange}) => {
         axios.post('http://localhost:3001/login', {email: email, password: password})
             .then(res => {console.log(res)
                 if(res.data.success){
-                    Cookies.set("role", res.data.role);
+                    const userData = {
+                        email: email,
+                        role: res.data.role,
+                        name: res.data.name,
+                        department: res.data.department,
+                        id: res.data.id,
+                    };
+                    Cookies.set("user", JSON.stringify(userData));
+                    console.log("Saved user cookie:", Cookies.get("user"));
                     toast.success("✅ Login successful!");
                     // Optionally redirect after short delay
                     setTimeout(() => navigate("/home"), 1500);
