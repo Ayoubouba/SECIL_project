@@ -1,11 +1,50 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import Statcard from "./components/Statcard.jsx";
 import CourseManagement from "./components/CourseManagement.jsx";
+import UserManagement from "./components/UserManagement.jsx";
+import {toast} from "react-toastify";
 
 const Adminpage = () => {
-    const [activeTab, setActiveTab] = useState("overview"); // default tab
+    const [activeTab, setActiveTab] = useState("overview");// default tab
+    const [showModal, setShowModal] = useState(false);
+    const [formData, setFormData] = useState({
+        title: "",
+        category: "",
+        img: "",
+        author: "",
+        duration: "",
+        evalution: "",
+        diff: "",
+    });
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+    const handleCourseCreate = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const newCourse = Object.fromEntries(formData.entries());
+
+        try {
+            const res = await fetch("http://localhost:3001/courses", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newCourse),
+            });
+
+            if (res.ok) {
+                setShowModal(false);
+                toast.success("✅ Course created successfully.!");
+                setTimeout(()=>window.location.reload(), 1500);
+            } else {
+                toast.error( "❌ Course creation failed!");
+            }
+        } catch (error) {
+            console.error("Error creating course:", error);
+            toast.error( "⚠️ Something went wrong!");
+        }
+    };
     return (
         <>
             <div>
@@ -23,7 +62,8 @@ const Adminpage = () => {
                     <button data-slot="dialog-trigger"
                             className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive text-primary-foreground h-9 px-4 py-2 has-[&gt;svg]:px-3 bg-blue-700 hover:bg-blue-900"
                             type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:r5b:"
-                            data-state="closed">
+                            data-state="closed"
+                            onClick={() => setShowModal(true)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                              className="lucide lucide-plus h-4 w-4 mr-2" aria-hidden="true">
@@ -32,6 +72,71 @@ const Adminpage = () => {
                         </svg>
                         Create Course
                     </button>
+                    {showModal && (
+                        <div className="fixed inset-0 bg-gray-50 bg-opacity-30 flex justify-center items-center z-50">
+                            <div className="bg-white bg-opacity-95 p-6 rounded-lg w-80 text-black shadow-lg backdrop-blur-sm">
+                                <h3 className="text-xl font-bold mb-4 text-center">Create Course</h3>
+                                <form onSubmit={handleCourseCreate} className="flex flex-col gap-4">
+                                    {[
+                                        { name: "title", label: "Title", type: "text" },
+                                        { name: "category", label: "Category", type: "text" },
+                                        { name: "img", label: "Image URL", type: "text" },
+                                        { name: "author", label: "Author", type: "text" },
+                                        { name: "duration", label: "Duration", type: "text" },
+                                    ].map((field) => (
+                                        <div key={field.name} className="relative w-full">
+                                            <input
+                                                type={field.type}
+                                                name={field.name}
+                                                id={field.name}
+                                                placeholder=" "
+                                                required
+                                                className="peer block w-full rounded-md border border-gray-300 px-3 pt-5 pb-2 text-sm text-gray-900 focus:border-blue-600 focus:ring focus:ring-blue-200 focus:outline-none focus:shadow-md bg-white bg-opacity-90"
+                                            />
+                                            <label
+                                                htmlFor={field.name}
+                                                className="absolute left-3 top-2 text-gray-400 text-sm transition-all peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-gray-600 peer-focus:text-sm"
+                                            >
+                                                {field.label}
+                                            </label>
+                                        </div>
+                                    ))}
+
+                                    {/* Difficulty Dropdown */}
+                                    <div className="relative w-full">
+                                        <select
+                                            name="diff"
+                                            id="diff"
+                                            required
+                                            className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900 focus:border-blue-600 focus:ring focus:ring-blue-200 focus:outline-none focus:shadow-md bg-white bg-opacity-90"
+                                            defaultValue=""
+                                        >
+                                            <option value="" disabled>Difficulty</option>
+                                            <option value="Beginner">Beginner</option>
+                                            <option value="Intermediate">Intermediate</option>
+                                            <option value="Advanced">Advanced</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="flex justify-end gap-2 mt-2">
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowModal(false)}
+                                            className="px-4 py-2 border rounded hover:bg-gray-100"
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            type="submit"
+                                            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                                        >
+                                            Create
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 ">
                     <Statcard title={"Total Courses"} SVG={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -201,8 +306,7 @@ const Adminpage = () => {
 
                         {activeTab === "User Management" && (
                             <div>
-                                <h2 className="text-xl font-bold">User Management</h2>
-                                <p>Manage registered students and their progress here.</p>
+                                <UserManagement />
                             </div>
                         )}
                     </div>

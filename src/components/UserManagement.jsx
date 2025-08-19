@@ -1,10 +1,12 @@
 import React from 'react'
+import "./Usermanagement.css"
+import "tailwindcss";
 const UserManagement = () => {
     return (
         <div data-slot="card"
              className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 corporate-shadow">
             <div data-slot="card-header"
-                 className="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 pt-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6">
+                 className=" @container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 pt-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6">
                 <div className="flex items-center justify-between">
                     <div><h4 data-slot="card-title" className="leading-none">User Management</h4><p
                         data-slot="card-description" className="text-muted-foreground">Manage user accounts,
@@ -56,7 +58,7 @@ const UserManagement = () => {
                         <div className="flex items-center space-x-4"><span data-slot="avatar"
                                                                            className="relative flex size-10 shrink-0 overflow-hidden rounded-full h-12 w-12"><span
                             data-slot="avatar-fallback"
-                            className="flex size-full items-center justify-center rounded-full bg-[var(--color-corporate-blue-light)] text-[var(--color-corporate-blue)]">JS</span></span>
+                            className="flex size-full items-center justify-center rounded-full bg-blue-200 text-blue-600">JS</span></span>
                             <div>
                                 <div className="flex items-center space-x-2 mb-1"><h4 className="font-semibold">João
                                     Silva</h4><span data-slot="badge"
@@ -64,7 +66,7 @@ const UserManagement = () => {
                                 </div>
                                 <p className="text-sm text-gray-500">Production Engineer •
                                     Production • SEC-12345</p><p
-                                className="text-xs text-[var(--color-corporate-gray)]">8 courses completed • 85h
+                                className="text-xs text-gray-500">8 courses completed • 85h
                                 learning time</p></div>
                         </div>
                         <div className="flex items-center space-x-2">
@@ -118,11 +120,11 @@ const UserManagement = () => {
                         <div className="flex items-center space-x-4"><span data-slot="avatar"
                                                                            className="relative flex size-10 shrink-0 overflow-hidden rounded-full h-12 w-12"><span
                             data-slot="avatar-fallback"
-                            className="flex size-full items-center justify-center rounded-full bg-[var(--color-corporate-blue-light)] text-[var(--color-corporate-blue)]">MS</span></span>
+                            className="flex size-full items-center justify-center rounded-full bg-blue-200 text-blue-500">MS</span></span>
                             <div>
                                 <div className="flex items-center space-x-2 mb-1"><h4 className="font-semibold">Maria
                                     Santos</h4><span data-slot="badge"
-                                                     className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&amp;&gt;svg]:size-3 gap-1 [&amp;&gt;svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden border-transparent [a&amp;]:hover:bg-primary/90 bg-[var(--color-corporate-orange)] text-white"><svg
+                                                     className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&amp;&gt;svg]:size-3 gap-1 [&amp;&gt;svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden border-transparent [a&amp;]:hover:bg-primary/90 bg-orange-600 text-white"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" className="lucide lucide-shield h-3 w-3 mr-1"
@@ -185,7 +187,7 @@ const UserManagement = () => {
                         <div className="flex items-center space-x-4"><span data-slot="avatar"
                                                                            className="relative flex size-10 shrink-0 overflow-hidden rounded-full h-12 w-12"><span
                             data-slot="avatar-fallback"
-                            className="flex size-full items-center justify-center rounded-full bg-[var(--color-corporate-blue-light)] text-[var(--color-corporate-blue)]">CO</span></span>
+                            className="flex size-full items-center justify-center rounded-full bg-blue-200 text-blue-500">CO</span></span>
                             <div>
                                 <div className="flex items-center space-x-2 mb-1"><h4 className="font-semibold">Carlos
                                     Oliveira</h4><span data-slot="badge"
@@ -247,7 +249,7 @@ const UserManagement = () => {
                         <div className="flex items-center space-x-4"><span data-slot="avatar"
                                                                            className="relative flex size-10 shrink-0 overflow-hidden rounded-full h-12 w-12"><span
                             data-slot="avatar-fallback"
-                            className="flex size-full items-center justify-center rounded-full bg-[var(--color-corporate-blue-light)] text-[var(--color-corporate-blue)]">AC</span></span>
+                            className="flex size-full items-center justify-center rounded-full bg-blue-200 text-blue-500">AC</span></span>
                             <div>
                                 <div className="flex items-center space-x-2 mb-1"><h4 className="font-semibold">Ana
                                     Costa</h4><span data-slot="badge"

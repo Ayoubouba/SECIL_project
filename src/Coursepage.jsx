@@ -51,7 +51,7 @@ const Coursepage = () => {
             <div className="h-fit">
                 <Navbar/>
             </div>
-            <div className="flex justify-center  w-full h-fit pt-5 shadow-md rounded-lg">
+            <div className="flex justify-center  w-full h-fit pt-5 shadow-md rounded-lg bg-gradient-to-br from-blue-200 via-amber-50 to-red-100 to-100%">
                 <section>
                     <div className="flex justify-between flex-row w-full h-fit">
                         <button data-slot="button"
@@ -66,11 +66,18 @@ const Coursepage = () => {
                         </button>
                         {/* ✅ Button only for admins */}
                         {role === "admin" && (
-                            <button
-                                onClick={() => setShowModal(true)}
-                                className="bg-blue-600 text-white px-4 py-2 rounded-lg mb-4"
-                            >
-                                ➕ Create Course
+                            <button data-slot="dialog-trigger"
+                                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive text-primary-foreground h-9 px-4 py-2 has-[&gt;svg]:px-3 bg-blue-700 hover:bg-blue-900"
+                                    type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:r5b:"
+                                    data-state="closed"
+                                    onClick={() => setShowModal(true)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                     className="lucide lucide-plus h-4 w-4 mr-2" aria-hidden="true">
+                                    <path d="M5 12h14"></path>
+                                    <path d="M12 5v14"></path>
+                                </svg>
+                                Create Course
                             </button>
                         )}
                     </div>
@@ -147,13 +154,11 @@ const Coursepage = () => {
                     </div>
                 </div>
             )}
-
-
             <hr/>
-            <div className="flex justify-center items-center w-full h-fit mb-5">
+            <div className="flex justify-center items-center w-full h-fit mb-5 ">
                 <SearchEngine/>
             </div>
-            <div className="flex    w-full h-fit p-5">
+            <div className="flex    w-full h-fit p-5 bg-gradient-to-br from-blue-100 via-amber-50 to-red-100 to-100%">
                 <Courseshow/>
             </div>
             <footer>
