@@ -7,6 +7,7 @@ import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Adminpage from "./Adminpage.jsx";
 import "./App.css"
+import Settingpage from "./Settingpage.jsx";
 const App = () => {
     return (
         <>
@@ -16,7 +17,8 @@ const App = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/CoursePage" element={<CoursePage />} />
-                    <Route path="/Admin" element={<Adminpage/>}/>
+                    <Route path="/Admin" element={<Adminpage />}/>
+                    <Route path="/Settings" element={<Settingpage />} />
                 </Routes>
             </Router>
             <ToastContainer position="top-center" autoClose={2500} />

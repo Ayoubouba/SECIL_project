@@ -12,6 +12,7 @@ const HoverProfile = ({ imageSrc, label = "Profile" }) => {
     const email = user?.email || "Not available";
     const id = user?.id || "N/A";
     const department = user?.department || "N/A";
+    const role= user?.role || "user";
     const toggleMenu = () => {
         setOpen((prev) => !prev);
     };
@@ -65,7 +66,7 @@ const HoverProfile = ({ imageSrc, label = "Profile" }) => {
                     [--radix-dropdown-menu-trigger-height:var(--radix-popper-anchor-height)]">
                         <div data-slot="dropdown-menu-label"
                              className="px-2 py-1.5 text-sm data-[inset]:pl-8 font-normal">
-                            <div className="flex flex-col space-y-1"><p
+                            <div className="flex flex-col space-y-1 items-center"><p
                                 className="text-sm font-medium leading-none">{name}</p><p
                                 className="text-xs leading-none text-muted-foreground">{email}</p><p
                                 className="text-xs leading-none text-muted-foreground">{department}</p></div>
@@ -74,7 +75,8 @@ const HoverProfile = ({ imageSrc, label = "Profile" }) => {
                              className="bg-border -mx-1 my-1 h-px"></div>
                         <div role="menuitem" data-slot="dropdown-menu-item" data-variant="default"
                              className="hover:bg-gray-400 hover:text-amber-50 focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&amp;_svg:not([class*='text-'])]:text-muted-foreground relative flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 cursor-pointer"
-                             tabIndex="-1" data-orientation="vertical" data-radix-collection-item="">
+                             tabIndex="-1" data-orientation="vertical" data-radix-collection-item=""
+                            onClick={()=>navigate("/Settings")}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round" className="lucide lucide-user mr-2 h-4 w-4" aria-hidden="true">
@@ -83,18 +85,21 @@ const HoverProfile = ({ imageSrc, label = "Profile" }) => {
                             </svg>
                             Account Settings
                         </div>
-                        <div role="menuitem" data-slot="dropdown-menu-item" data-variant="default"
-                             className="hover:bg-gray-400 hover:text-amber-50 focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&amp;_svg:not([class*='text-'])]:text-muted-foreground relative flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 cursor-pointer"
-                             tabIndex="-1" data-orientation="vertical" data-radix-collection-item="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" className="lucide lucide-shield mr-2 h-4 w-4"
-                                 aria-hidden="true">
-                                <path
-                                    d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
-                            </svg>
-                            Admin Dashboard
-                        </div>
+                        {role==="admin"&&(
+                            <div role="menuitem" data-slot="dropdown-menu-item" data-variant="default"
+                                 className="hover:bg-gray-400 hover:text-amber-50 focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&amp;_svg:not([class*='text-'])]:text-muted-foreground relative flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 cursor-pointer"
+                                 tabIndex="-1" data-orientation="vertical" data-radix-collection-item=""
+                                onClick={()=>navigate("/Admin")}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" className="lucide lucide-shield mr-2 h-4 w-4"
+                                     aria-hidden="true">
+                                    <path
+                                        d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                                </svg>
+                                Admin Dashboard
+                            </div>
+                        )}
                         <div role="separator" aria-orientation="horizontal" data-slot="dropdown-menu-separator"
                              className="bg-border -mx-1 my-1 h-px"></div>
                         <div role="menuitem" data-slot="dropdown-menu-item" data-variant="default"

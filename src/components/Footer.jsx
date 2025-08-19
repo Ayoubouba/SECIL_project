@@ -10,7 +10,7 @@ const Footer = () => {
                     <div>
                         <img src="https://cimentsdegabes.com.tn/wp-content/uploads/2023/10/logo.png" alt="logo" className="rounded-2xl w-20 h-20"/>
                         <h2 className="text-white font-bold text-lg mb-4">SECIL</h2>
-                        <p className="text-sm">
+                        <p className="text-sm text-white">
                             Société des Ciments de Gabès is a public limited company founded in 1973 and specializing in the manufacture of binders (cement and artificial lime). Its Gabès plant went into production in 1977.  Its main market covers the whole of southern Tunisia.
                         </p>
                     </div>
@@ -40,9 +40,9 @@ const Footer = () => {
                     {/* Column 4: Contact */}
                     <div>
                         <h3 className="text-white font-semibold mb-4">Contact Us</h3>
-                        <p className="text-sm">123 Business Street, City, Country</p>
-                        <p className="text-sm mt-2">Email: support@yourcompany.com</p>
-                        <p className="text-sm">Phone: +1 (555) 123-4567</p>
+                        <p className="text-sm text-white">123 Business Street, City, Country</p>
+                        <p className="text-sm mt-2 text-white">Email: support@yourcompany.com</p>
+                        <p className="text-sm text-white">Phone: +1 (555) 123-4567</p>
 
                         {/* Social icons */}
                         <div className="flex space-x-4 mt-4">

@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@tailwind;
+@tailwind utilities;
+@plugin "daisyui";
+@layer base {
+    p{
+        color: gray;
+    }
+    h4{
+        color: black;
+        font-weight: bold;
+    }
+    input{
+        color: gray;
+    }
+    label{
+        color: black;
+    }
+}
