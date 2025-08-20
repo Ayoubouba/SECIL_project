@@ -8,7 +8,7 @@ const Learning = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-fit">
                 <div>
                     <div data-slot="card"
-                         className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-md">
+                         className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-lg">
                         <div data-slot="card-content" className="[&amp;:last-child]:pb-6 p-6">
                             <div className="flex items-center">
                                 <div className="p-3 rounded-full bg-blue-100 mr-4">
@@ -29,7 +29,7 @@ const Learning = () => {
                 </div>
                 <div >
                     <div data-slot="card"
-                         className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-md">
+                         className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-lg">
                         <div data-slot="card-content" className="[&amp;:last-child]:pb-6 p-6">
                             <div className="flex items-center">
                                 <div className="p-3 rounded-full bg-green-100 mr-4">
@@ -49,7 +49,7 @@ const Learning = () => {
                 </div>
                 <div>
                     <div data-slot="card"
-                         className="bg-card text-card-foreground flex flex-col gap-3 rounded-xl border-0 shadow-md ">
+                         className="bg-card text-card-foreground flex flex-col gap-3 rounded-xl border-0 shadow-lg ">
                         <div data-slot="card-content" className="[&amp;:last-child]:pb-6 p-6 ">
                             <div className="flex items-center">
                                 <div className="p-3 rounded-full bg-orange-100 mr-4">
@@ -70,7 +70,7 @@ const Learning = () => {
                 </div>
                 <div >
                     <div data-slot="card"
-                         className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-md">
+                         className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-lg">
                         <div data-slot="card-content" className="[&amp;:last-child]:pb-6 p-6">
                             <div className="flex items-center">
                                 <div className="p-3 rounded-full bg-purple-100 mr-4">
@@ -92,7 +92,7 @@ const Learning = () => {
                 </div>
             </div>
             <div data-slot="card"
-                 className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-md">
+                 className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-lg">
                 <div data-slot="card-header"
                      className="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 pt-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6">
                     <h4 data-slot="card-title" className="leading-none">Recent Courses</h4><p
@@ -152,7 +152,7 @@ const Learning = () => {
                 </div>
             </div>
             <div data-slot="card"
-                 className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-md">
+                 className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-lg">
                 <div data-slot="card-header"
                      className="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 pt-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6">
                     <h4 data-slot="card-title" className="leading-none">Achievements</h4><p data-slot="card-description"

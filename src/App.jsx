@@ -21,7 +21,7 @@ const App = () => {
                     <Route path="/Settings" element={<Settingpage />} />
                 </Routes>
             </Router>
-            <ToastContainer position="top-center" autoClose={2500} />
+            <ToastContainer position="top-center" reverseOrder={false} autoClose={2500} />
         </>
     )
 }

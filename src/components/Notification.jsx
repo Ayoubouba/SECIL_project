@@ -6,7 +6,7 @@ const Notification = () => {
              aria-labelledby="radix-:r2v:-trigger-notifications" id="radix-:r2v:-content-notifications" tabIndex="0"
              data-slot="tabs-content" className="flex-1 outline-none space-y-6 mb-5 ">
             <div data-slot="card"
-                 className="mb-5 bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-md">
+                 className="mb-5 bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-2xl">
                 <div data-slot="card-header"
                      className="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 pt-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6">
                     <h4 data-slot="card-title" className="leading-none flex items-center">
@@ -45,7 +45,7 @@ const Notification = () => {
                                   data-state="checked"
                                   data-slot="switch-thumb"
                                   className="
-                                  block h-5 w-5 rounded-full bg-white shadow-md transform transition-transform duration-300
+                                  block h-5 w-5 rounded-full bg-white shadow-2xl transform transition-transform duration-300
                                   translate-x-0
                                   data-[state=checked]:translate-x-6">
 
@@ -75,7 +75,7 @@ const Notification = () => {
                                   data-state="checked"
                                   data-slot="switch-thumb"
                                   className="
-                                  block h-5 w-5 rounded-full bg-white shadow-md transform transition-transform duration-300
+                                  block h-5 w-5 rounded-full bg-white shadow-2xl transform transition-transform duration-300
                                   translate-x-0
                                   data-[state=checked]:translate-x-6">
 
@@ -105,7 +105,7 @@ const Notification = () => {
                                   data-state="checked"
                                   data-slot="switch-thumb"
                                   className="
-                                  block h-5 w-5 rounded-full bg-white shadow-md transform transition-transform duration-300
+                                  block h-5 w-5 rounded-full bg-white shadow-2xl transform transition-transform duration-300
                                   translate-x-0
                                   data-[state=checked]:translate-x-6">
 
@@ -135,7 +135,7 @@ const Notification = () => {
                                   data-state="unchecked"
                                   data-slot="switch-thumb"
                                   className="
-                                  block h-5 w-5 rounded-full bg-white shadow-md transform transition-transform duration-300
+                                  block h-5 w-5 rounded-full bg-white shadow-2xl transform transition-transform duration-300
                                   translate-x-0
                                   data-[state=checked]:translate-x-6">
 

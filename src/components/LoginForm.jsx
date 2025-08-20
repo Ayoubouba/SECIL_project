@@ -17,6 +17,7 @@ const LoginForm = ({Onloginchange}) => {
                         email: email,
                         role: res.data.role,
                         name: res.data.name,
+                        password: password,
                         department: res.data.department,
                         id: res.data.id,
                     };

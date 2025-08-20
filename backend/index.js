@@ -9,6 +9,8 @@ import cors from "cors";
 import USERS from "./models/USERS.js";
 
 import Course from "./models/COURSES.js";
+import bcrypt from "bcrypt";
+import {User} from "lucide-react";
 
 const app = express();
 app.use(express.json());
@@ -18,7 +20,7 @@ app.use(cors());
 mongoose.connect("mongodb://localhost:27017/SECIL_database");
 
 app.post("/login", (req, res) => {
-    const { email, password,first_name,last_name,department,employee_id} = req.body;
+    const { email, password,first_name,last_name,department,employee_id,} = req.body;
     const user = USERS.findOne({ email })
         .then(user => {
             if(user){
@@ -26,6 +28,7 @@ app.post("/login", (req, res) => {
                     res.json({
                         success: true,
                         email: user.email,
+                        password:user.password,
                         role: user.role,
                         name: user.first_name + " " +user.last_name,
                         department: user.department,
@@ -124,7 +127,76 @@ app.delete("/courses/:id", async (req, res) => {
     }
 });
 
+app.put("/update-profile", async (req, res) => {
+    try {
+        const { email, password, updates } = req.body;
 
+        const user = await USERS.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ success: false, message: "❌ User not found" });
+        }
+
+        // ✅ Confirm password
+        if (user.password !== password) {
+            return res.status(401).json({ success: false, message: "❌ Incorrect password" });
+        }
+
+        // ✅ Update fields
+        if (updates.first_name) user.first_name = updates.first_name;
+        if (updates.last_name) user.last_name = updates.last_name;
+        if (updates.department) user.department = updates.department;
+
+        await user.save();
+
+        res.json({
+            success: true,
+            message: "✅ Profile updated successfully",
+            updatedUser: {
+                email: user.email,
+                name: user.first_name + " " + user.last_name,
+                department: user.department,
+                id: user.employee_id,
+                role: user.role
+            }
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: "⚠️ Server error" });
+    }
+});
+
+app.put("/update-password", async (req, res) => {
+    try {
+        const { email,currentpass, newPassword } = req.body;
+
+        // find user
+        const user = await USERS.findOne({ email });
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        // check current password
+        if (!(currentpass===user.password)) return res.status(400).json({ message: "Incorrect current password" });
+
+        // update
+        user.password = newPassword;
+        await user.save();
+
+        res.json({
+            success: true,
+            message: "✅ Profile updated successfully",
+            updatedUser: {
+                email: user.email,
+                password: newPassword,
+                name: user.first_name + " " + user.last_name,
+                department: user.department,
+                id: user.employee_id,
+                role: user.role
+            }
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server error" });
+    }
+});
 
 app.listen(3001,()=>{
     console.log("server running on port 3001");
