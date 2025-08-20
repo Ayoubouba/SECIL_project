@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "./coursecard.css"
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -6,8 +6,8 @@ import {toast} from "react-toastify";
 import { Trash2 } from "lucide-react";
 
 const Coursecard = ({id,title,category,img,author,duration,evalution,diff}) => {
-    const role = Cookies.get("role");
-
+    const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
+    const [role] = useState(user?.role || "user");
     const handleDelete = async () => {
         // show a toast with confirm buttons
         const toastId = toast(

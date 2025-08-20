@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 const Coursepage = () => {
     const navigate = useNavigate();
+    const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
     const [showModal, setShowModal] = useState(false);
     const [formData, setFormData] = useState({
         title: "",
@@ -18,7 +19,7 @@ const Coursepage = () => {
         evalution: "",
         diff: "",
     });
-    const role = Cookies.get("role");
+    const role= user?.role || "user";
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };

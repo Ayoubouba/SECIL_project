@@ -9,9 +9,10 @@ import cors from "cors";
 import USERS from "./models/USERS.js";
 
 import Course from "./models/COURSES.js";
-import bcrypt from "bcrypt";
-import {User} from "lucide-react";
 
+import Certificate from "./models/CERTIFICATES.js";
+import COURSES from "./models/COURSES.js";
+import Activity from "./models/ACTIVITIES.js";
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
@@ -19,12 +20,29 @@ app.use(cors());
 
 mongoose.connect("mongodb://localhost:27017/SECIL_database");
 
+app.post("/logout", async (req, res) => {
+    const { email } = req.body;
+    try {
+        const user = await USERS.findOne({ email });
+        if (user) {
+            user.active = false;
+            await user.save();
+        }
+        res.json({ success: true });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false });
+    }
+});
+
 app.post("/login", (req, res) => {
     const { email, password,first_name,last_name,department,employee_id,} = req.body;
     const user = USERS.findOne({ email })
         .then(user => {
             if(user){
                 if(user.password === password){
+                    user.active=true;
+                    user.save();
                     res.json({
                         success: true,
                         email: user.email,
@@ -83,9 +101,63 @@ app.post("/USERS", async (req, res) => {
         res.status(500).json({ success: false, message: "⚠️ Server error, please try again later." });
     }
 });
+
+
+// Get all certificates
+app.get("/certificates", async (req, res) => {
+    try {
+        const certs = await Certificate.find()
+            .populate("userId", "first_name last_name email")
+            .populate("courseId", "title");
+
+        res.json(certs);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch certificates" });
+    }
+});
+
+// Issue new certificate
+app.post("/certificates", async (req, res) => {
+    try {
+        const { userId, courseId } = req.body;
+
+        const newCert = new Certificate({ userId, courseId });
+        await newCert.save();
+
+        res.status(201).json(newCert);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to issue certificate" });
+    }
+});
+
+// Get all users
+app.get("/users", async (req, res) => {
+    try {
+        const users = await USERS.find();
+
+        // Optional: format for frontend
+        const formatted = users.map(u => ({
+            id: u._id,
+            first_name: u.first_name,
+            last_name: u.last_name,
+            email: u.email,
+            department: u.department,
+            employee_id: u.employee_id,
+            role: u.role,
+            active: u.active ?? true  // 👈 assuming you might track active users
+        }));
+
+        res.json(formatted);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch users" });
+    }
+});
 // Get all courses
 app.get("/courses", async (req, res) => {
-    const courses = await Course.find();
+    const courses = await COURSES.find();
     // map _id into id
     const formatted = courses.map(c => ({
         id: c._id,    // 👈 new field
@@ -110,6 +182,12 @@ app.post("/courses", async (req, res) => {
         const newCourse = new Course({ title, category, img, author, duration, evalution:0 , diff });
         await newCourse.save();
 
+        await Activity.create({
+            type: "Course Created",
+            user: author || "Admin",
+            target: title,
+        });
+
         res.status(201).json(newCourse);
     } catch (err) {
         console.error(err);
@@ -122,11 +200,18 @@ app.delete("/courses/:id", async (req, res) => {
         const deleted = await Course.findByIdAndDelete(req.params.id);
         if (!deleted) return res.status(404).json({ error: "Course not found" });
         res.json({ message: "Course deleted successfully" });
+
+        // Log activity
+        await Activity.create({
+            type: "Course Deleted",
+            user: "Admin",   // or fetch current logged in user
+            target: deleted.title,
+        });
     } catch (err) {
         res.status(500).json({ error: "Failed to delete course" });
     }
 });
-
+//update profile
 app.put("/update-profile", async (req, res) => {
     try {
         const { email, password, updates } = req.body;
@@ -164,7 +249,7 @@ app.put("/update-profile", async (req, res) => {
         res.status(500).json({ success: false, message: "⚠️ Server error" });
     }
 });
-
+//update password
 app.put("/update-password", async (req, res) => {
     try {
         const { email,currentpass, newPassword } = req.body;
@@ -197,6 +282,19 @@ app.put("/update-password", async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 });
+
+app.get("/activities", async (req, res) => {
+    try {
+        const activities = await Activity.find()
+            .sort({ timestamp: -1 })  // newest first
+            .limit(3);                // last 3 modifications
+        res.json(activities);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch activities" });
+    }
+});
+
 
 app.listen(3001,()=>{
     console.log("server running on port 3001");

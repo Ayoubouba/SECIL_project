@@ -10,8 +10,7 @@ const Profile = () => {
     const [email] = useState(user?.email || "NA"); // email is verified & not editable
     const [id] = useState(user?.id || "NA");
     const [department, setDepartment] = useState(user?.department || "NA");
-    const [role] = useState(user?.role || "user");;
-
+    const [role] = useState(user?.role || "user");
     // 🔹 State to toggle edit mode
     const [isEditing, setIsEditing] = useState(true);
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
+import {toast} from "react-toastify";
 
 const HoverProfile = ({ imageSrc, label = "Profile" }) => {
     const navigate = useNavigate();
@@ -16,7 +17,32 @@ const HoverProfile = ({ imageSrc, label = "Profile" }) => {
     const toggleMenu = () => {
         setOpen((prev) => !prev);
     };
+    const handleLogout = async () => {
+        try {
+            const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
+            if (!user) return;
 
+            // Call backend to set active = false
+            const res = await fetch("http://localhost:3001/logout", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: user.email }),
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                toast.success("✅ Logged out successfully");
+                // Remove user cookie/session
+                Cookies.remove("user");
+                window.location.href = "/"; // redirect to login page
+            } else {
+                toast.error("❌ Logout failed");
+            }
+        } catch (err) {
+            console.error("Logout error:", err);
+            toast.error("⚠️ Something went wrong");
+        }
+    };
     return (
         <div className=" m-2 relative shadow-2xs rounded-lg bg-white">
             {/* Profile Button */}
@@ -105,7 +131,7 @@ const HoverProfile = ({ imageSrc, label = "Profile" }) => {
                         <div role="menuitem" data-slot="dropdown-menu-item" data-variant="default"
                              className="text-red-600 hover:bg-red-600 data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&amp;_svg:not([class*='text-'])]:text-muted-foreground relative flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 cursor-pointer   hover:text-amber-50"
                              tabIndex="-1" data-orientation="vertical" data-radix-collection-item=""
-                             onClick={()=>navigate("/")}>
+                             onClick={handleLogout}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round" className="lucide lucide-log-out mr-2 h-4 w-4"
