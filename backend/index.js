@@ -155,6 +155,54 @@ app.get("/users", async (req, res) => {
         res.status(500).json({ error: "Failed to fetch users" });
     }
 });
+// delete a user
+app.delete("/users/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const {password} = req.body;
+        const user = await USERS.findById(id);
+        if (!user) return res.status(404).json({ error: "User not found" });
+
+        if (user.role === "admin") {
+            return res.status(403).json({ error: "Admin users cannot be deleted" });
+        }
+        if(password!==user.password){
+            return res.status(405).json({ error: "wrong password" });
+        }
+        await USERS.findByIdAndDelete(id);
+        res.json({ message: "User deleted successfully" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to delete user" });
+    }
+});
+
+//update user role
+app.patch("/users/:id/role", async (req, res) => {
+    try {
+        const { id } = req.params;     // user ID from URL
+        const { role } = req.body;     // new role from request body
+
+        if (!["admin", "user"].includes(role)) {
+            return res.status(400).json({ error: "Invalid role value" });
+        }
+
+        const updatedUser = await USERS.findByIdAndUpdate(
+            id,
+            { role },
+            { new: true } // return updated user
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.json(updatedUser);
+    } catch (err) {
+        console.error("Error updating role:", err);
+        res.status(500).json({ error: "Failed to update role" });
+    }
+})
 // Get all courses
 app.get("/courses", async (req, res) => {
     const courses = await COURSES.find();
