@@ -20,6 +20,9 @@ const Coursepage = () => {
         diff: "",
     });
     const role= user?.role || "user";
+    const [searchText, setSearchText] = useState('');
+    const [category, setCategory] = useState('All');
+    const [difficulty, setDifficulty] = useState('All');
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -157,10 +160,18 @@ const Coursepage = () => {
             )}
             <hr/>
             <div className="flex justify-center items-center w-full h-fit mb-5 ">
-                <SearchEngine/>
+                <SearchEngine searchText={searchText}
+                              setSearchText={setSearchText}
+                              category={category}
+                              setCategory={setCategory}
+                              difficulty={difficulty}
+                              setDifficulty={setDifficulty}/>
             </div>
             <div className="flex    w-full h-fit p-5 bg-gradient-to-br from-blue-100 via-amber-50 to-red-100 to-100%">
-                <Courseshow/>
+                <Courseshow searchText={searchText}
+                            setSearchText={setSearchText}
+                            category={category}
+                            difficulty={difficulty}/>
             </div>
             <footer>
                 <Footer/>
