@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const SearchEngine = ({ searchText, setSearchText, category, setCategory, difficulty, setDifficulty }) => {
     const [open1, setOpen1] = useState(false);
@@ -103,28 +103,9 @@ const SearchEngine = ({ searchText, setSearchText, category, setCategory, diffic
                         </div>
                     )}
                 </div>
-
-                {/* Third dropdown (keep as-is) */}
-                <div className="lg:col-span-2 relative">
-                    <button
-                        onClick={() => toggleMenu(3)}
-                        className="w-full border rounded-md px-3 py-2 flex justify-between items-center"
-                    >
-                        Newest <span>▼</span>
-                    </button>
-                    {open3 && (
-                        <div className="absolute mt-2 w-full bg-white shadow-lg rounded-lg border z-10">
-                            <ul>
-                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Option 1</li>
-                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Option 2</li>
-                            </ul>
-                        </div>
-                    )}
-                </div>
-
                 {/* View buttons */}
                 <div className="lg:col-span-2 flex space-x-2">
-                    <button className="inline-flex items-center justify-center w-full text-sm font-medium h-8 rounded-md border bg-primary text-primary-foreground hover:bg-primary/90 gap-1.5">
+                    <button className="inline-flex items-center justify-center w-full text-sm font-medium h-8 rounded-md border bg-primary text-white hover:bg-primary/90 gap-1.5">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -144,7 +125,7 @@ const SearchEngine = ({ searchText, setSearchText, category, setCategory, diffic
                             <path d="M15 3v18"></path>
                         </svg>
                     </button>
-                    <button className="inline-flex items-center justify-center w-full text-sm font-medium h-8 rounded-md border bg-background text-foreground hover:bg-accent hover:text-accent-foreground gap-1.5">
+                    <button className="inline-flex items-center justify-center w-full text-sm font-medium h-8 rounded-md border bg-background text-foreground hover:bg-orange-600 hover:text-amber-50 gap-1.5">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"

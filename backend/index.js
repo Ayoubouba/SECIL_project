@@ -159,14 +159,15 @@ app.get("/users", async (req, res) => {
 app.delete("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const {password} = req.body;
+        const {id_admin,password} = req.body;
         const user = await USERS.findById(id);
         if (!user) return res.status(404).json({ error: "User not found" });
 
         if (user.role === "admin") {
             return res.status(403).json({ error: "Admin users cannot be deleted" });
         }
-        if(password!==user.password){
+        const admin=USERS.findOne({id_admin});
+        if(password!==admin.password){
             return res.status(405).json({ error: "wrong password" });
         }
         await USERS.findByIdAndDelete(id);
@@ -176,7 +177,6 @@ app.delete("/users/:id", async (req, res) => {
         res.status(500).json({ error: "Failed to delete user" });
     }
 });
-
 //update user role
 app.patch("/users/:id/role", async (req, res) => {
     try {

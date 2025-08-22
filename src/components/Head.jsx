@@ -22,18 +22,18 @@ const Head = () => {
             </div>
             <div className=" w-[50%] h-full ">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-100% mt-10">
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
+                </div>
+                <div className="grid grid-cols-2 gap-4">
                         <div data-slot="card"
                              className="flex flex-col gap-6  border bg-white/10 border-white/20 text-white backdrop-blur-sm transform transition-transform duration-300 ease-out hover:scale-105 hover:-translate-y-1
-shadow-md hover:shadow-2xl rounded-lg overflow-hidden">
+                                            shadow-md hover:shadow-2xl rounded-lg overflow-hidden">
                             <div data-slot="card-content" className="[&amp;:last-child]:pb-6 p-6 text-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                      stroke-linejoin="round"
                                      className="lucide lucide-users h-8 w-8 mx-auto mb-3 text-[var(--color-corporate-orange)]"
                                      aria-hidden="true">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
                                     <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
                                     <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
                                     <circle cx="9" cy="7" r="4"></circle>
@@ -52,7 +52,7 @@ shadow-md hover:shadow-2xl rounded-lg overflow-hidden">
                                      className="lucide lucide-clock h-8 w-8 mx-auto mb-3 text-[var(--color-corporate-orange)]"
                                      aria-hidden="true">
                                     <path d="M12 6v6l4 2"></path>
-                                    <circle cx="12" cy="12" r="10"></circle>
+                                           <circle cx="12" cy="12" r="10"></circle>
                                 </svg>
                                 <div className="text-2xl font-bold mb-1">18,650</div>
                                 <div className="text-sm opacity-80">Training Hours Completed</div>

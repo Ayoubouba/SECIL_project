@@ -1,7 +1,17 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import CourseManagementCard from "./CourseManagementCard.jsx";
+import Coursecard from "./Coursecard.jsx";
 
 const CourseManagement = () => {
+    const [courses, setCourses] = React.useState([]);
+    useEffect(() => {
+        fetch("http://localhost:3001/courses")
+            .then(res => res.json())
+            .then(data => {
+                setCourses(data);
+            })
+            .catch(err => console.error("Error fetching courses:", err));
+    }, []);
     return (
         <div data-slot="card"
              className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-0 shadow-xl overflow-hidden">
@@ -41,27 +51,16 @@ const CourseManagement = () => {
                 </div>
             </div>
             <div data-slot="card-content" className="px-6 [&amp;:last-child]:pb-6">
-                <CourseManagementCard
-                    title={"Safety Management &amp; Leadership"}
-                    logo={"S"}
-                    author={"Dr. Carlos Silva • Safety • Intermediate"}
-                    stat={"1876 students • Created 2024-01-15"}
-                    state={"active"}
+                {courses.map(course => (
+                    <CourseManagementCard
+                        key={course.id}
+                        id={course.id}
+                        title={course.title}
+                        category={course.category}
+                        author={course.author}
+                        diff={course.diff}
                     />
-                <CourseManagementCard
-                    title={"Cement Production Excellence"}
-                    logo={"P"}
-                    author={"Eng. Maria Santos • Production • Advanced"}
-                    stat={"1234 students • Created 2024-01-10"}
-                    state={"active"}
-                />
-                <CourseManagementCard
-                    title={"Quality Control Draft"}
-                    logo={"Q"}
-                    author={"Dr. João Oliveira • Quality • Professional"}
-                    stat={"0 students . Created 2024-01-20"}
-                    state={"draft"}
-                />
+                ))}
             </div>
         </div>
     )

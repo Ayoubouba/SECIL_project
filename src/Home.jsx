@@ -8,7 +8,8 @@ import {Categorie} from "./components/Categorie.jsx";
 import Coursecard from "./components/Coursecard.jsx";
 import Footer from "./components/Footer.jsx";
 import {useNavigate} from "react-router-dom";
-
+import {BarChart3} from "lucide-react";
+import { Shield, Factory, Wrench } from "lucide-react";
 const Home = () => {
     const navigate = useNavigate();
     const [courses, setCourses] = useState([]);
@@ -36,32 +37,28 @@ const Home = () => {
             </div>
             <div className="text-zinc-900 flex justify-evenly w-full h-fit rounded-3xl mt-2 p-4">
                 <Categorie
-                    img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5NP1CAH8gHHJmSVNWLoBxXZKhp-nQbB4G_g&s"
+                    icon={<Shield className="w-12 h-12 text-blue-600 hover:scale-110 transition-transform" />}
                     title="Safety & Health"
                     para="Workplace safety and health protocols"
                     nb_courses={28}
-
                 />
                 <Categorie
-                    img="https://thumb.ac-illust.com/d1/d1ecc69100d8ef553aeb2dbf0bd78866_t.jpeg"
+                    icon={<Factory className="w-12 h-12 text-green-600 hover:scale-110 transition-transform" />}
                     title="Production"
                     para="Cement manufacturing processes"
                     nb_courses={35}
-
                 />
                 <Categorie
-                    img="https://www.iconpacks.net/icons/1/free-chart-icon-646-thumb.png"
+                    icon={<BarChart3 className="w-12 h-12 text-purple-600 hover:scale-110 transition-transform" />}
                     title="Quality Control"
                     para="Quality standards and testing"
                     nb_courses={22}
-
                 />
                 <Categorie
-                    img="https://www.shutterstock.com/image-vector/wrench-icon-spanner-service-tool-260nw-1043436448.jpg"
+                    icon={<Wrench className="w-12 h-12 text-orange-600 hover:scale-110 transition-transform" />}
                     title="Maintenance"
                     para="Equipment and facility maintenance"
                     nb_courses={19}
-
                 />
             </div>
             <div className=" text-zinc-900 flex justify-center flex-col items-start w-full h-fit rounded-3xl mt-2 ">

@@ -2,10 +2,5 @@
 @tailwind;
 @tailwind utilities;
 @plugin "daisyui";
-@layer base {
-    .body{
-        background-color: steelblue;
-    }
-}
 
 

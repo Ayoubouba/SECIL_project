@@ -1,12 +1,12 @@
 import React from 'react'
-
-export const Categorie = ({img, title, para, nb_courses}) => {
+import {BarChart3} from "lucide-react";
+export const Categorie = ({icon, title, para, nb_courses}) => {
     return (
         <>
             <div data-slot="card-content" className=" flex flex-col items-center justify-center w-[22%] h-50% gap-4  pb-6 p-6 text-center shadow-2xl rounded-lg mt-5 ">
                 <div
                     className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-200 mb-4 group-hover:bg-blue-800 transition-colors">
-                    <img src={img} alt="IMG" className="rounded-full" />
+                    {icon}
                 </div>
                 <h3 className="font-semibold mb-2 text-gray-900">{title}</h3>
                 <p className="text-sm text-gray-600 mb-3 h-20%">{para}</p>
