@@ -180,29 +180,30 @@ app.delete("/users/:id", async (req, res) => {
 //update user role
 app.patch("/users/:id/role", async (req, res) => {
     try {
-        const { id } = req.params;     // user ID from URL
-        const { role } = req.body;     // new role from request body
+        const { id } = req.params;
+        const { role } = req.body;
 
-        if (!["admin", "user"].includes(role)) {
-            return res.status(400).json({ error: "Invalid role value" });
-        }
+        // Find the user being updated
+        const user = await User.findOne({ employee_id: id });
 
-        const updatedUser = await USERS.findByIdAndUpdate(
-            id,
-            { role },
-            { new: true } // return updated user
-        );
-
-        if (!updatedUser) {
+        if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
 
-        res.json(updatedUser);
+        // Prevent role change if user is super admin
+        if (user.role === "super admin") {
+            return res.status(403).json({ error: "Super Admin role cannot be changed" });
+        }
+
+        user.role = role;
+        await user.save();
+
+        res.json({ role: user.role });
     } catch (err) {
         console.error("Error updating role:", err);
         res.status(500).json({ error: "Failed to update role" });
     }
-})
+});
 // Get all courses
 app.get("/courses", async (req, res) => {
     const courses = await COURSES.find();

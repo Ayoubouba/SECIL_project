@@ -51,7 +51,7 @@ const Coursecard = ({id,title,category,img,author,duration,evalution,diff}) => {
                     {diff}
                 </span>
                 {/* ✅ Delete button for Admins only */}
-                {role === "admin" && (
+                {role === "admin"||role==="superAdmin" && (
                     <button
                         onClick={handleDelete}
                         className="absolute top-0 right-0 inline-flex items-center justify-center text-[12px] font-bold rounded-md gap-1.5 bg-red-500 hover:bg-red-700 active:bg-red-800 text-white px-2 py-1 transition-all duration-200 group"

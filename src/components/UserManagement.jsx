@@ -49,6 +49,14 @@ const UserManagement = () => {
 
     const toggleRole = async (id, newRole) => {
         try {
+            const userToUpdate = users.find((u) => u.employee_id === id);
+
+            // Prevent changing/removing a super admin
+            if (userToUpdate?.role === "superAdmin") {
+                toast.error("You cannot change the role of a Super Admin");
+                return;
+            }
+
             const res = await axios.patch(`http://localhost:3001/users/${id}/role`, { role: newRole });
             setUsers((prev) =>
                 prev.map((user) =>

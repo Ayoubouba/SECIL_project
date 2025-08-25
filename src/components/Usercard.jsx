@@ -6,6 +6,10 @@ const Usercard = ({id,email,name,state,employee_id,department,role,onToggleRole,
     const [showModal, setShowModal] = useState(false);
     const initials=firstName[0].toLocaleUpperCase()+lastName[0].toLocaleUpperCase();
     const handleDelete = () => {
+        if(role==="superAdmin"){
+            toast.error("super admin cant be deleted");
+            return;
+        }
         if (role === "admin") {
             toast.error("Admin users cannot be deleted!");
             return;
@@ -35,6 +39,17 @@ const Usercard = ({id,email,name,state,employee_id,department,role,onToggleRole,
                                 aria-hidden="true"><path
                                 d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>
                                 Admin
+                            </span>
+                        )}
+                        {role==="superAdmin"&& (
+                            <span data-slot="badge"
+                                  className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&amp;&gt;svg]:size-3 gap-1 [&amp;&gt;svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden border-transparent [a&amp;]:hover:bg-primary/90 bg-red-600 text-white"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" className="lucide lucide-shield h-3 w-3 mr-1"
+                                aria-hidden="true"><path
+                                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>
+                                Super Admin
                             </span>
                         )}
                         {state ?
@@ -76,11 +91,11 @@ const Usercard = ({id,email,name,state,employee_id,department,role,onToggleRole,
                             data-state="open"
                             data-slot="dialog-content"
                             className="bg-white bg-gradient-to-br from-blue-200 via-amber-50 to-red-100 to-100% data-[state=open]:animate-in data-[state=closed]:animate-out
-                 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
-                 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
-                 fixed top-[50%] left-[50%] z-50 grid w-full max-w-4xl max-h-[90vh]
-                 translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg
-                 duration-200 sm:max-w-lg overflow-y-auto"
+                             data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
+                             data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
+                             fixed top-[50%] left-[50%] z-50 grid w-full max-w-4xl max-h-[90vh]
+                             translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg
+                             duration-200 sm:max-w-lg overflow-y-auto"
                             tabIndex="-1"
                             onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                         >
@@ -247,7 +262,7 @@ const Usercard = ({id,email,name,state,employee_id,department,role,onToggleRole,
                                 </div>
                             </div>
                         </div>
-                        <button type="button" onClick={setShowModal}
+                        <button type="button" onClick={() => setShowModal(false)}
                                 className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

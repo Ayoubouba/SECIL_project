@@ -69,7 +69,7 @@ const Coursepage = () => {
                             Back to Dashboard
                         </button>
                         {/* ✅ Button only for admins */}
-                        {role === "admin" && (
+                        {role === "admin"||role==="superAdmin" && (
                             <button data-slot="dialog-trigger"
                                     className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive text-primary-foreground h-9 px-4 py-2 has-[&gt;svg]:px-3 bg-blue-700 hover:bg-blue-900"
                                     type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:r5b:"

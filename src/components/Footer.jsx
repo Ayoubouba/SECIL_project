@@ -1,73 +1,109 @@
-import React from 'react'
+import React from "react";
+import {
+    Facebook,
+    Twitter,
+    Instagram,
+    Linkedin,
+    MapPin,
+    Mail,
+    Phone,
+} from "lucide-react";
 
 const Footer = () => {
     return (
-        <>
-            <footer className="bg-blue-600 text-gray-300 pt-10">
-                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <footer className="relative bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-800 text-gray-200 pt-12 overflow-hidden w-full">
+            {/* Animated gradient glows */}
+            <div className="absolute inset-0 -z-10">
+                <div className="absolute top-1/3 left-1/2 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-1/3 right-1/2 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-500"></div>
+            </div>
 
-                    {/* Column 1: Company Info */}
-                    <div>
-                        <img src="https://cimentsdegabes.com.tn/wp-content/uploads/2023/10/logo.png" alt="logo" className="rounded-2xl w-20 h-20"/>
-                        <h2 className="text-white font-bold text-lg mb-4">SECIL</h2>
-                        <p className="text-sm text-white">
-                            Société des Ciments de Gabès is a public limited company founded in 1973 and specializing in the manufacture of binders (cement and artificial lime). Its Gabès plant went into production in 1977.  Its main market covers the whole of southern Tunisia.
-                        </p>
-                    </div>
-
-                    {/* Column 2: Quick Links */}
-                    <div>
-                        <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-                        <ul className="space-y-2 text-sm">
-                            <li><a href="#" className="hover:text-white">Home</a></li>
-                            <li><a href="#" className="hover:text-white">About Us</a></li>
-                            <li><a href="#" className="hover:text-white">Services</a></li>
-                            <li><a href="#" className="hover:text-white">Contact</a></li>
-                        </ul>
-                    </div>
-
-                    {/* Column 3: Resources */}
-                    <div>
-                        <h3 className="text-white font-semibold mb-4">Resources</h3>
-                        <ul className="space-y-2 text-sm">
-                            <li><a href="#" className="hover:text-white">Blog</a></li>
-                            <li><a href="#" className="hover:text-white">FAQs</a></li>
-                            <li><a href="#" className="hover:text-white">Help Center</a></li>
-                            <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
-                        </ul>
-                    </div>
-
-                    {/* Column 4: Contact */}
-                    <div>
-                        <h3 className="text-white font-semibold mb-4">Contact Us</h3>
-                        <p className="text-sm text-white">123 Business Street, City, Country</p>
-                        <p className="text-sm mt-2 text-white">Email: support@yourcompany.com</p>
-                        <p className="text-sm text-white">Phone: +1 (555) 123-4567</p>
-
-                        {/* Social icons */}
-                        <div className="flex space-x-4 mt-4">
-                            <a href="#" className="hover:text-white">
-                                <i className="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" className="hover:text-white">
-                                <i className="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" className="hover:text-white">
-                                <i className="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" className="hover:text-white">
-                                <i className="fab fa-linkedin-in"></i>
-                            </a>
-                        </div>
-                    </div>
+            <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
+                {/* Column 1: Company Info */}
+                <div className="hover:scale-[1.02] transition-transform">
+                    <img
+                        src="https://cimentsdegabes.com.tn/wp-content/uploads/2023/10/logo.png"
+                        alt="logo"
+                        className="rounded-2xl w-20 h-20 mb-4 shadow-lg"
+                    />
+                    <h2 className="text-white font-bold text-xl mb-3">SECIL</h2>
+                    <p className="text-sm leading-relaxed text-gray-200">
+                        Société des Ciments de Gabès, founded in 1973, specializes in
+                        binders (cement & lime). Serving southern Tunisia since 1977.
+                    </p>
                 </div>
 
-                {/* Bottom bar */}
-                <div className="border-t border-gray-700 mt-10 py-4 text-center text-sm">
-                    © {new Date().getFullYear()} YourCompany. All rights reserved.
+                {/* Column 2: Quick Links */}
+                <div>
+                    <h3 className="text-white font-semibold text-lg mb-4">Quick Links</h3>
+                    <ul className="space-y-2 text-sm">
+                        {["Home", "About Us", "Services", "Contact"].map((link, i) => (
+                            <li key={i}>
+                                <a
+                                    href="#"
+                                    className="relative hover:text-white transition-colors before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-blue-400 hover:before:w-full before:transition-all before:duration-300"
+                                >
+                                    {link}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-            </footer>
-        </>
-        )
-}
-export default Footer
+
+                {/* Column 3: Resources */}
+                <div>
+                    <h3 className="text-white font-semibold text-lg mb-4">Resources</h3>
+                    <ul className="space-y-2 text-sm">
+                        {["Blog", "FAQs", "Help Center", "Privacy Policy"].map((link, i) => (
+                            <li key={i}>
+                                <a
+                                    href="#"
+                                    className="relative hover:text-white transition-colors before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-purple-400 hover:before:w-full before:transition-all before:duration-300"
+                                >
+                                    {link}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Column 4: Contact */}
+                <div>
+                    <h3 className="text-white font-semibold text-lg mb-4">Contact Us</h3>
+                    <div className="flex items-center gap-2 text-sm">
+                        <MapPin size={16} className="text-blue-300" />
+                        <span>123 Business Street, City, Country</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm mt-2">
+                        <Mail size={16} className="text-purple-300" />
+                        <span>support@yourcompany.com</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm mt-2">
+                        <Phone size={16} className="text-indigo-300" />
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+
+                    {/* Social icons */}
+                    <div className="flex space-x-4 mt-5">
+                        {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+                            <a
+                                key={i}
+                                href="#"
+                                className="p-2 rounded-full bg-white/10 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-300"
+                            >
+                                <Icon size={18} className="text-white" />
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Bottom bar */}
+            <div className="border-t border-white/20 mt-12 py-5 text-center text-sm text-gray-300">
+                © {new Date().getFullYear()} SECIL. All rights reserved.
+            </div>
+        </footer>
+    );
+};
+
+export default Footer;
