@@ -16,19 +16,6 @@ Built with **React.js (frontend)**, **Node.js/Express (backend)**, and **MongoDB
 
 ---
 
-## 🏗️ Project Structure
-project-root/
-│
-├── frontend/ # React.js frontend (components, pages, redux, services)
-│
-├── backend/ # Node.js + Express backend
-│ ├── app/ # API routes
-│ ├── controllers/ # Business logic
-│ ├── models/ # Mongoose schemas
-│ ├── middlewares/ # JWT, role-based access
-│
-└── database/ # MongoDB (Users, Courses, Participations, Certificates)
-
 ## ⚙️ Installation & Setup
 
 1. **Clone the repository**
