@@ -55,10 +55,12 @@ const CourseManagement = () => {
                     <CourseManagementCard
                         key={course.id}
                         id={course.id}
+                        logp={course.title[0]}
                         title={course.title}
                         category={course.category}
                         author={course.author}
                         diff={course.diff}
+                        state={course.state}
                     />
                 ))}
             </div>

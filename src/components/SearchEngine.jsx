@@ -26,21 +26,22 @@ const SearchEngine = ({ searchText, setSearchText, category, setCategory, diffic
     const difficulties = ['All', 'Beginner', 'Intermediate', 'Advanced'];
 
     return (
-        <div className="p-6 shadow-2xl rounded-2xl text-gray-500 w-[80%] mt-5">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-end">
+        <div className="p-6 shadow-2xl rounded-2xl bg-white text-gray-700 w-full max-w-6xl mx-auto mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-8 gap-4">
+
                 {/* Search input */}
-                <div className="lg:col-span-4 relative">
+                <div className="md:col-span-3 lg:col-span-4 relative">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
+                        width="20"
+                        height="20"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"
+                        className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"
                     >
                         <path d="m21 21-4.34-4.34"></path>
                         <circle cx="11" cy="11" r="8"></circle>
@@ -50,7 +51,7 @@ const SearchEngine = ({ searchText, setSearchText, category, setCategory, diffic
                         placeholder="Search courses or instructors..."
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
-                        className="pl-10 h-11 w-full border rounded-md px-3 py-2"
+                        className="pl-10 h-11 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
 
@@ -58,18 +59,18 @@ const SearchEngine = ({ searchText, setSearchText, category, setCategory, diffic
                 <div className="lg:col-span-2 relative">
                     <button
                         onClick={() => toggleMenu(1)}
-                        className="w-full border rounded-md px-3 py-2 flex justify-between items-center"
+                        className="w-full h-11 border border-gray-300 rounded-lg px-3 py-2 flex justify-between items-center hover:bg-gray-50 transition"
                     >
-                        {category} <span>▼</span>
+                        {category} <span className="text-gray-400">▼</span>
                     </button>
                     {open1 && (
-                        <div className="absolute mt-2 w-full bg-white shadow-lg rounded-lg border z-10">
-                            <ul>
+                        <div className="absolute mt-2 w-full bg-white shadow-lg rounded-lg border border-gray-200 z-20">
+                            <ul className="max-h-60 overflow-y-auto">
                                 {categories.map((cat) => (
                                     <li
                                         key={cat}
                                         onClick={() => handleCategorySelect(cat)}
-                                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                        className="px-4 py-2 hover:bg-blue-50 cursor-pointer"
                                     >
                                         {cat}
                                     </li>
@@ -83,18 +84,18 @@ const SearchEngine = ({ searchText, setSearchText, category, setCategory, diffic
                 <div className="lg:col-span-2 relative">
                     <button
                         onClick={() => toggleMenu(2)}
-                        className="w-full border rounded-md px-3 py-2 flex justify-between items-center"
+                        className="w-full h-11 border border-gray-300 rounded-lg px-3 py-2 flex justify-between items-center hover:bg-gray-50 transition"
                     >
-                        {difficulty} <span>▼</span>
+                        {difficulty} <span className="text-gray-400">▼</span>
                     </button>
                     {open2 && (
-                        <div className="absolute mt-2 w-full bg-white shadow-lg rounded-lg border z-10">
-                            <ul>
+                        <div className="absolute mt-2 w-full bg-white shadow-lg rounded-lg border border-gray-200 z-20">
+                            <ul className="max-h-60 overflow-y-auto">
                                 {difficulties.map((diff) => (
                                     <li
                                         key={diff}
                                         onClick={() => handleDifficultySelect(diff)}
-                                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                        className="px-4 py-2 hover:bg-blue-50 cursor-pointer"
                                     >
                                         {diff}
                                     </li>
@@ -103,53 +104,8 @@ const SearchEngine = ({ searchText, setSearchText, category, setCategory, diffic
                         </div>
                     )}
                 </div>
-                {/* View buttons */}
-                <div className="lg:col-span-2 flex space-x-2">
-                    <button className="inline-flex items-center justify-center w-full text-sm font-medium h-8 rounded-md border bg-primary text-white hover:bg-primary/90 gap-1.5">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="h-4 w-4"
-                        >
-                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                            <path d="M3 9h18"></path>
-                            <path d="M3 15h18"></path>
-                            <path d="M9 3v18"></path>
-                            <path d="M15 3v18"></path>
-                        </svg>
-                    </button>
-                    <button className="inline-flex items-center justify-center w-full text-sm font-medium h-8 rounded-md border bg-background text-foreground hover:bg-orange-600 hover:text-amber-50 gap-1.5">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="h-4 w-4"
-                        >
-                            <path d="M3 12h.01"></path>
-                            <path d="M3 18h.01"></path>
-                            <path d="M3 6h.01"></path>
-                            <path d="M8 12h13"></path>
-                            <path d="M8 18h13"></path>
-                            <path d="M8 6h13"></path>
-                        </svg>
-                    </button>
-                </div>
             </div>
         </div>
     );
-};
-
-export default SearchEngine;
+}
+    export default SearchEngine;

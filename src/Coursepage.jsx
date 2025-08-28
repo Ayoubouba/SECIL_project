@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 const Coursepage = () => {
     const navigate = useNavigate();
+    const [previewImg, setPreviewImg] = useState("");
     const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
     const [showModal, setShowModal] = useState(false);
     const [formData, setFormData] = useState({
@@ -69,7 +70,7 @@ const Coursepage = () => {
                             Back to Dashboard
                         </button>
                         {/* ✅ Button only for admins */}
-                        {role === "admin"||role==="superAdmin" && (
+                        {(role === "admin"||role==="superAdmin") && (
                             <button data-slot="dialog-trigger"
                                     className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive text-primary-foreground h-9 px-4 py-2 has-[&gt;svg]:px-3 bg-blue-700 hover:bg-blue-900"
                                     type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:r5b:"
@@ -94,67 +95,99 @@ const Coursepage = () => {
             </div>
             {/* ✅ Modal for creating a course */}
             {showModal && (
-                <div className="fixed inset-0 bg-gray-50 bg-opacity-30 flex justify-center items-center z-50">
-                    <div className="bg-white bg-opacity-95 p-6 rounded-lg w-80 text-black shadow-lg backdrop-blur-sm">
-                        <h3 className="text-xl font-bold mb-4 text-center">Create Course</h3>
-                        <form onSubmit={handleCourseCreate} className="flex flex-col gap-4">
-                            {[
-                                { name: "title", label: "Title", type: "text" },
-                                { name: "category", label: "Category", type: "text" },
-                                { name: "img", label: "Image URL", type: "text" },
-                                { name: "author", label: "Author", type: "text" },
-                                { name: "duration", label: "Duration", type: "text" },
-                            ].map((field) => (
-                                <div key={field.name} className="relative w-full">
-                                    <input
-                                        type={field.type}
-                                        name={field.name}
-                                        id={field.name}
-                                        placeholder=" "
-                                        required
-                                        className="peer block w-full rounded-md border border-gray-300 px-3 pt-5 pb-2 text-sm text-gray-900 focus:border-blue-600 focus:ring focus:ring-blue-200 focus:outline-none focus:shadow-md bg-white bg-opacity-90"
-                                    />
-                                    <label
-                                        htmlFor={field.name}
-                                        className="absolute left-3 top-2 text-gray-400 text-sm transition-all peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-gray-600 peer-focus:text-sm"
-                                    >
-                                        {field.label}
-                                    </label>
-                                </div>
-                            ))}
+                <div className="fixed inset-0 bg-gray-50 bg-opacity-40 flex justify-center items-center z-50">
+                    <div className="bg-white bg-opacity-95 p-6 rounded-xl w-[600px] text-black shadow-2xl backdrop-blur-sm animate-fadeIn">
+                        <h3 className="text-2xl font-bold mb-6 text-center">✨ Create Course</h3>
 
-                            {/* Difficulty Dropdown */}
-                            <div className="relative w-full">
-                                <select
-                                    name="diff"
-                                    id="diff"
-                                    required
-                                    className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900 focus:border-blue-600 focus:ring focus:ring-blue-200 focus:outline-none focus:shadow-md bg-white bg-opacity-90"
-                                    defaultValue=""
-                                >
-                                    <option value="" disabled>Difficulty</option>
-                                    <option value="Beginner">Beginner</option>
-                                    <option value="Intermediate">Intermediate</option>
-                                    <option value="Advanced">Advanced</option>
-                                </select>
+                        <form id="courseForm" onSubmit={handleCourseCreate} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* Left side: form fields */}
+                            <div className="flex flex-col gap-4">
+                                {[
+                                    { name: "title", label: "Title", type: "text" },
+                                    { name: "category", label: "Category", type: "text" },
+                                    { name: "author", label: "Author", type: "text" },
+                                    { name: "duration", label: "Duration", type: "text" },
+                                ].map((field) => (
+                                    <div key={field.name} className="relative w-full">
+                                        <input
+                                            type={field.type}
+                                            name={field.name}
+                                            id={field.name}
+                                            placeholder=" "
+                                            required
+                                            className="peer block w-full rounded-md border border-gray-300 px-3 pt-5 pb-2 text-sm text-gray-900
+                focus:border-blue-600 focus:ring focus:ring-blue-200 focus:outline-none focus:shadow-md bg-white"
+                                        />
+                                        <label
+                                            htmlFor={field.name}
+                                            className="absolute left-3 top-2 text-gray-400 text-sm transition-all
+                peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-sm
+                peer-focus:top-2 peer-focus:text-blue-600 peer-focus:text-xs"
+                                        >
+                                            {field.label}
+                                        </label>
+                                    </div>
+                                ))}
+
+                                {/* Difficulty Dropdown */}
+                                <div className="relative w-full">
+                                    <select
+                                        name="diff"
+                                        id="diff"
+                                        required
+                                        className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900
+              focus:border-blue-600 focus:ring focus:ring-blue-200 focus:outline-none focus:shadow-md bg-white"
+                                        defaultValue=""
+                                    >
+                                        <option value="" disabled>
+                                            Difficulty
+                                        </option>
+                                        <option value="Beginner">Beginner</option>
+                                        <option value="Intermediate">Intermediate</option>
+                                        <option value="Advanced">Advanced</option>
+                                    </select>
+                                </div>
                             </div>
 
-                            <div className="flex justify-end gap-2 mt-2">
-                                <button
-                                    type="button"
-                                    onClick={() => setShowModal(false)}
-                                    className="px-4 py-2 border rounded hover:bg-gray-100"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    type="submit"
-                                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                                >
-                                    Create
-                                </button>
+                            {/* Right side: Image upload/preview */}
+                            <div className="flex flex-col items-center gap-3">
+                                <div className="relative w-40 h-40 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center bg-gray-50 overflow-hidden">
+                                    {previewImg ? (
+                                        <img src={previewImg} alt="Course preview" className="object-cover w-full h-full" />
+                                    ) : (
+                                        <span className="text-gray-400 text-sm">Preview</span>
+                                    )}
+                                </div>
+                                <input
+                                    type="text"
+                                    name="img"
+                                    id="img"
+                                    placeholder="Image URL"
+                                    required
+                                    onChange={(e) => setPreviewImg(e.target.value)}
+                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900
+            focus:border-blue-600 focus:ring focus:ring-blue-200 focus:outline-none focus:shadow-md bg-white"
+                                />
                             </div>
                         </form>
+
+                        {/* Actions */}
+                        <div className="flex justify-end gap-3 mt-6">
+                            <button
+                                type="button"
+                                onClick={() => setShowModal(false)}
+                                className="px-4 py-2 border rounded-md hover:bg-gray-100 transition"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                form="courseForm"
+                                className="px-5 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition shadow-md"
+                            >
+                                Create
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}

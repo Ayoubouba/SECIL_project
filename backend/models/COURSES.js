@@ -7,7 +7,8 @@ const courseSchema = new mongoose.Schema({
     author: String,
     duration: String,
     evalution: Number,
-    diff: String
+    diff: String,
+    state: {type: String,default:"draft"}
 });
 
 const Course = mongoose.model("Course", courseSchema);

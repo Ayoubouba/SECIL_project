@@ -55,37 +55,42 @@ const Createaccount = ({Onloginchange}) => {
                 <div className="flex justify-center items-center min-h-screen  p-4 gap-2">
                     <form
                         onSubmit={handleSubmit}
-                        className=" p-8  shadow-lg w-full max-w-lg"
+                        className="p-8 shadow-lg w-full max-w-lg"
                     >
                         <h2 className="text-2xl font-bold mb-6 text-gray-800">Sign up Form</h2>
 
-                        {/* First Name */}
-                        <label className="block mb-2 text-gray-700 font-medium">
-                            First Name
-                        </label>
-                        <input
-                            type="text"
-                            name="firstName"
-                            value={Fname}
-                            placeholder="Enter first name"
-                            onChange={(e) => setFname(e.target.value)}
-                            className="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:ring-2 focus:ring-indigo-400 outline-none"
-                            required
-                        />
+                        {/* First + Last Name */}
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label className="block mb-2 text-gray-700 font-medium">
+                                    First Name
+                                </label>
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    value={Fname}
+                                    placeholder="Enter first name"
+                                    onChange={(e) => setFname(e.target.value)}
+                                    className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+                                    required
+                                />
+                            </div>
 
-                        {/* Last Name */}
-                        <label className="block mb-2 text-gray-700 font-medium">
-                            Last Name
-                        </label>
-                        <input
-                            type="text"
-                            name="lastName"
-                            value={Lname}
-                            onChange={(e)=>setLname(e.target.value)}
-                            placeholder="Enter last name"
-                            className="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:ring-2 focus:ring-indigo-400 outline-none"
-                            required
-                        />
+                            <div>
+                                <label className="block mb-2 text-gray-700 font-medium">
+                                    Last Name
+                                </label>
+                                <input
+                                    type="text"
+                                    name="lastName"
+                                    value={Lname}
+                                    onChange={(e) => setLname(e.target.value)}
+                                    placeholder="Enter last name"
+                                    className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+                                    required
+                                />
+                            </div>
+                        </div>
 
                         {/* Email */}
                         <label className="block mb-2 text-gray-700 font-medium">
@@ -108,7 +113,7 @@ const Createaccount = ({Onloginchange}) => {
                         <select
                             name="department"
                             value={department}
-                            onChange={(e)=>setDepartment(e.target.value)}
+                            onChange={(e) => setDepartment(e.target.value)}
                             className="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:ring-2 focus:ring-indigo-400 outline-none"
                             required
                         >
@@ -126,39 +131,44 @@ const Createaccount = ({Onloginchange}) => {
                             type="text"
                             name="employeeId"
                             value={employeeId}
-                            onChange={(e)=>setEmployeeId(e.target.value)}
+                            onChange={(e) => setEmployeeId(e.target.value)}
                             placeholder="Enter employee ID"
                             className="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:ring-2 focus:ring-indigo-400 outline-none"
                             required
                         />
 
-                        {/* Password */}
-                        <label className="block mb-2 text-gray-700 font-medium">
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={password}
-                            onChange={(e)=>setPassword(e.target.value)}
-                            placeholder="Enter password"
-                            className="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:ring-2 focus:ring-indigo-400 outline-none"
-                            required
-                        />
+                        {/* Password + Confirm Password */}
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label className="block mb-2 text-gray-700 font-medium">
+                                    Password
+                                </label>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="Enter password"
+                                    className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+                                    required
+                                />
+                            </div>
 
-                        {/* Confirm Password */}
-                        <label className="block mb-2 text-gray-700 font-medium">
-                            Confirm Password
-                        </label>
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            value={ConfirmPassword}
-                            onChange={(e)=>setConfirmPassword(e.target.value)}
-                            placeholder="Confirm Password"
-                            className="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:ring-2 focus:ring-indigo-400 outline-none"
-                            required
-                        />
+                            <div>
+                                <label className="block mb-2 text-gray-700 font-medium">
+                                    Confirm Password
+                                </label>
+                                <input
+                                    type="password"
+                                    name="confirmPassword"
+                                    value={ConfirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    placeholder="Confirm password"
+                                    className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+                                    required
+                                />
+                            </div>
+                        </div>
 
                         {/* Agree to Terms */}
                         <div className="flex items-center mb-4">
@@ -166,7 +176,7 @@ const Createaccount = ({Onloginchange}) => {
                                 type="checkbox"
                                 name="agree"
                                 checked={agree}
-                                onChange={(e)=>setAgree("True")}
+                                onChange={(e) => setAgree("True")}
                                 className="mr-2"
                                 required
                             />

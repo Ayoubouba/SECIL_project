@@ -83,19 +83,29 @@ const Usercard = ({id,email,name,state,employee_id,department,role,onToggleRole,
                     </svg>
                 </button>
                 {showModal && (
-                    <div className="fixed inset-0 z-40 " onClick={() => setShowModal(false)}>
+                    <div className="fixed inset-0 z-40" onClick={() => setShowModal(false)}>
                         <div
                             role="dialog"
                             aria-describedby="radix-:r1b:"
                             aria-labelledby="radix-:r1a:"
                             data-state="open"
                             data-slot="dialog-content"
-                            className="bg-white bg-gradient-to-br from-blue-200 via-amber-50 to-red-100 to-100% data-[state=open]:animate-in data-[state=closed]:animate-out
-                             data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
-                             data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
-                             fixed top-[50%] left-[50%] z-50 grid w-full max-w-4xl max-h-[90vh]
-                             translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg
-                             duration-200 sm:max-w-lg overflow-y-auto"
+                            className={`
+                                fixed top-[50%] left-[50%] z-50 grid w-full max-w-4xl max-h-[90vh]
+                                translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg
+                                duration-200 sm:max-w-lg overflow-y-auto
+                                data-[state=open]:animate-in data-[state=closed]:animate-out
+                                data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
+                                data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
+                                bg-white
+                                ${
+                                role === "admin"
+                                    ? "bg-gradient-to-br from-white via-orange-100 to-orange-300 shadow-[0_0_25px_5px_rgba(255,165,0,0.6)]"
+                                    : role === "superAdmin"
+                                        ? "bg-gradient-to-br from-white via-red-100 to-red-300 shadow-[0_0_25px_5px_rgba(255,0,0,0.6)]"
+                                        : "bg-gradient-to-br from-blue-200 via-amber-50 to-red-100"
+                                    }
+                             `}
                             tabIndex="-1"
                             onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                         >
@@ -111,8 +121,8 @@ const Usercard = ({id,email,name,state,employee_id,department,role,onToggleRole,
                                 data-slot="avatar-fallback"
                                 className="flex size-full items-center justify-center rounded-full bg-blue-200 text-blue-600 text-xl">{initials}</span></span>
                                 <div className="flex-1">
-                                    <div className="flex items-center space-x-2 mb-2"><h3
-                                        className="text-xl font-semibold">{name}</h3>
+                                    <div className="flex items-center space-x-2 mb-2">
+                                        <h3 className="text-xl font-semibold">{name}</h3>
                                         {state ?
                                             <span data-slot="badge"
                                                   className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&amp;&gt;svg]:size-3 gap-1 [&amp;&gt;svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden border-transparent [a&amp;]:hover:bg-secondary/90 bg-green-100 text-green-600">
@@ -124,6 +134,28 @@ const Usercard = ({id,email,name,state,employee_id,department,role,onToggleRole,
                                                 inactive
                                             </span>
                                         }
+                                        {role ==="admin"&& (
+                                            <span data-slot="badge"
+                                                  className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&amp;&gt;svg]:size-3 gap-1 [&amp;&gt;svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden border-transparent [a&amp;]:hover:bg-primary/90 bg-orange-600 text-white"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" className="lucide lucide-shield h-3 w-3 mr-1"
+                                                aria-hidden="true"><path
+                                                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>
+                                                 Admin
+                                            </span>
+                                            )}
+                                        {role==="superAdmin"&& (
+                                            <span data-slot="badge"
+                                                  className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&amp;&gt;svg]:size-3 gap-1 [&amp;&gt;svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden border-transparent [a&amp;]:hover:bg-primary/90 bg-red-600 text-white"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" className="lucide lucide-shield h-3 w-3 mr-1"
+                                                aria-hidden="true"><path
+                                                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>
+                                                 Super Admin
+                                            </span>
+                                            )}
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                                         <div className="space-y-2">
@@ -275,31 +307,51 @@ const Usercard = ({id,email,name,state,employee_id,department,role,onToggleRole,
                     </div>
                     </div>
                 )}
-                {role === "user" ?
-                    <button data-slot="button"
-                            onClick={() => onToggleRole(id, role === "admin" ? "user" : "admin")}
-                            className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background hover:bg-orange-500 hover:text-amber-50 dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 text-blue-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round" className="lucide lucide-shield-check h-4 w-4"
-                             aria-hidden="true">
-                            <path
-                                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                {role === "user" ? (
+                    <button
+                        data-slot="button"
+                        onClick={() => onToggleRole(id, "admin")}
+                        className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background hover:bg-orange-500 hover:text-amber-50 dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5 text-blue-600"
+                    >
+                        {/* User shield-check (blue) */}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                             className="lucide lucide-shield-check h-4 w-4" aria-hidden="true">
+                            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
                             <path d="m9 12 2 2 4-4"></path>
                         </svg>
                     </button>
-                    :
-                    <button data-slot="button"
-                            onClick={() => onToggleRole(id, role === "admin" ? "user" : "admin")}
-                            className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background hover:bg-orange-600 hover:text-white dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 text-orange-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                ) : role === "admin" ? (
+                    <button
+                        data-slot="button"
+                        onClick={() => onToggleRole(id, "superAdmin")}
+                        className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background hover:bg-orange-600 hover:text-white dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5 text-orange-600"
+                    >
+                        {/* Admin shield (orange) */}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                              className="lucide lucide-shield h-4 w-4" aria-hidden="true">
-                            <path
-                                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
                         </svg>
                     </button>
-                }
+                ) : (
+                    <button
+                        data-slot="button"
+                        onClick={() => onToggleRole(id, "user")}
+                        className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background hover:bg-red-600 hover:text-white dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5 text-red-600"
+                    >
+                        {/* SuperAdmin shield-star (red) */}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                             className="lucide lucide-shield-star h-4 w-4" aria-hidden="true">
+                            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                            <path d="M12 8l1.41 2.88L16.5 11l-2.25 2.12L15 16l-3-1.5L9 16l.75-2.88L7.5 11l3.09-.12L12 8z"></path>
+                        </svg>
+                    </button>
+                )}
                 <button
                     onClick={handleDelete}
                     data-slot="alert-dialog-trigger"

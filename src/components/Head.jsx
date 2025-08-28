@@ -51,11 +51,7 @@ const Head = () => {
                     >
                         Explore Training Programs
                     </button>
-                    <button
-                        className="px-8 py-4 text-lg font-semibold rounded-xl bg-gray-100 text-blue-900 shadow-lg hover:bg-gray-200 transition"
-                    >
-                        Watch Safety Overview
-                    </button>
+
                 </div>
             </motion.div>
 

@@ -184,7 +184,7 @@ app.patch("/users/:id/role", async (req, res) => {
         const { role } = req.body;
 
         // Find the user being updated
-        const user = await User.findOne({ employee_id: id });
+        const user = await USERS.findOne({ employee_id: id });
 
         if (!user) {
             return res.status(404).json({ error: "User not found" });
@@ -331,7 +331,7 @@ app.put("/update-password", async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 });
-
+//get activities
 app.get("/activities", async (req, res) => {
     try {
         const activities = await Activity.find()
@@ -344,6 +344,32 @@ app.get("/activities", async (req, res) => {
     }
 });
 
+//update course state
+app.patch("/courses/:id", async (req, res) => {
+    const { id } = req.params;
+    const { state } = req.body;
+
+    if (!["active", "draft"].includes(state)) {
+        return res.status(400).json({ error: "Invalid state value" });
+    }
+
+    try {
+        const updatedCourse = await Course.findByIdAndUpdate(
+            id,
+            { state },
+            { new: true } // return updated document
+        );
+
+        if (!updatedCourse) {
+            return res.status(404).json({ error: "Course not found" });
+        }
+
+        res.json(updatedCourse);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
+});
 
 app.listen(3001,()=>{
     console.log("server running on port 3001");

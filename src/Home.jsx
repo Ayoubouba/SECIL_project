@@ -29,7 +29,7 @@ const Home = () => {
             </div>
 
             {/* Scroll container */}
-            <div className="w-full h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth [scroll-snap-stop:always]">
+            <div className="w-full h-screen overflow-y-scroll snap-y snap-proximity scroll-smooth">
                 {/* Section 1: Hero / Head */}
                 <section className="snap-start flex justify-center items-center min-h-screen w-full">
                     <Head />
