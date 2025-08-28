@@ -1,12 +1,52 @@
-# React + Vite
+# 📚 Online Training Platform – SECIL Gabès
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a **modern e-learning platform** developed for the Société des Ciments de Gabès (SECIL) as part of the digital transformation of employee training.  
+The platform provides complete management of users, training courses, learning content, and performance tracking.  
+Built with **React.js (frontend)**, **Node.js/Express (backend)**, and **MongoDB (database)**, it ensures scalability, security, and a user-friendly experience.  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+- 🔐 Multi-role system (Admin, Learner) with secure **JWT authentication**  
+- 🎓 Course management with multimedia content (videos, documents, quizzes)  
+- 📊 Real-time progress tracking and interactive dashboards (Chart.js)  
+- 🏆 Automated certification system with PDF generation  
+- 📧 Email notifications and role-based access control  
+- 📱 Fully responsive UI for desktop and mobile  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🏗️ Project Structure
+project-root/
+│
+├── frontend/ # React.js frontend (components, pages, redux, services)
+│
+├── backend/ # Node.js + Express backend
+│ ├── app/ # API routes
+│ ├── controllers/ # Business logic
+│ ├── models/ # Mongoose schemas
+│ ├── middlewares/ # JWT, role-based access
+│
+└── database/ # MongoDB (Users, Courses, Participations, Certificates)
+
+## ⚙️ Installation & Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/secil-elearning-platform.git
+   cd secil-elearning-platform
+   cd backend && npm install
+   cd ../frontend && npm install
+   cd backend && npm start
+   cd frontend && npm start
+    ```
+
+##👨‍💻 Contributors
+
+Ayoub Wederni – Project Developer
+
+Supervised by: Nosra  & Hassen Mokhtar
+
+Institut Supérieur d’Informatique et de Mathématique de Monastir (ISIMM)
+
+Société des Ciments de Gabès (SECIL)
