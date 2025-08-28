@@ -27,8 +27,8 @@ Built with **React.js (frontend)**, **Node.js/Express (backend)**, and **MongoDB
    cd backend && npm start
    cd frontend && npm start
     ```
-
-##👨‍💻 Contributors
+---
+## 👨‍💻 Contributors
 
 Ayoub Wederni – Project Developer
 
